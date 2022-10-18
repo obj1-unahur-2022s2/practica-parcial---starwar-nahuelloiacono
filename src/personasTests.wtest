@@ -1,0 +1,76 @@
+import personas.*
+import planetas.*
+
+describe "test de personas" {
+	
+	const julieta = new Persona(edad = 42)
+	const ana = new Atleta(edad = 25)
+	const rosa = new Atleta(edad = 45, cantidadTecnicas = 8)
+	const perla = new Atleta(edad = 28, masaMuscular = 6, cantidadTecnicas = 4)
+	const monica = new Docente(edad = 45, cantidadCursos = 6)
+	const luisa = new Docente(edad = 35, cantidadCursos = 1)
+	
+	const triton = new Planeta(cantidadMuseos = 0)
+	
+	test "cualidades de Julieta" {
+		assert.that(julieta.potencia() == 20)
+		assert.that(julieta.inteligencia() == 8)
+		assert.notThat(julieta.esDestacada())
+	}
+	
+	test "cualidades de Ana" {
+		assert.that(ana.potencia() == 28)
+		assert.that(ana.inteligencia() == 12)
+		assert.that(ana.esDestacada())
+	}
+	
+	test "cualidades de Rosa" {
+		assert.that(rosa.potencia() == 52)
+		assert.that(rosa.inteligencia() == 8)
+		assert.that(rosa.esDestacada())
+	}
+	
+	test "cualidades de Perla" {
+		assert.that(perla.potencia() == 44)
+		assert.that(perla.inteligencia() == 12)
+		assert.notThat(perla.esDestacada())
+	}
+	
+	test "cualidades de Monica" {
+		assert.that(monica.potencia() == 20)
+		assert.that(monica.inteligencia() == 20)
+		assert.that(monica.esDestacada())
+	}
+	
+	test "cualidades de Luisa" {
+		assert.that(luisa.potencia() == 20)
+		assert.that(luisa.inteligencia() == 14)
+		assert.notThat(luisa.esDestacada())
+	}
+	
+	test "planeta Triton" {
+		triton.agregarPersona(julieta)
+		triton.agregarPersona(ana)
+		triton.agregarPersona(rosa)
+		triton.agregarPersona(perla)
+		triton.agregarPersona(monica)
+		triton.agregarPersona(luisa)
+		
+		assert.that(triton.delegacionDiplomatica() == #{ana, rosa, monica})
+		assert.that(triton.valorDefensa() == 2)
+		assert.notThat(triton.esCulto())
+		assert.that(triton.potenciaReal() == 184)
+	}
+	
+	test "perla entrena y aprende técnica" {
+		perla.entrenar(15)
+		perla.aprenderTecnica()
+		
+		assert.that(perla.potencia() == 65)
+		assert.notThat(perla.esDestacada())
+		
+		perla.aprenderTecnica()
+		
+		assert.that(perla.esDestacada())
+	}
+}
