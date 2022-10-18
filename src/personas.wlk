@@ -3,7 +3,6 @@ import planetas.*
 // Superclase.
 class Persona {
 	var property edad
-	var property planetaQueHabita
 	
 	method inteligencia() {
 		if (edad >= 20 and edad <= 40) return 12
@@ -12,7 +11,7 @@ class Persona {
 	method potencia() = 20
 	method esDestacada() = edad == 25 or edad == 35
 	
-	method ofrecerTributo() {}
+	method ofrecerTributo(planeta) {}
 	
 	method valor() = self.inteligencia() + self.potencia()
 }
@@ -25,12 +24,9 @@ class Atleta inherits Persona {
 	override method potencia() = super() + (masaMuscular * cantidadTecnicas)
 	override method esDestacada() = super() or cantidadTecnicas > 5
 	
-	// No se si está bien.
-	override method ofrecerTributo() {
-		planetaQueHabita.construirMurallas(2)
-	}
+	override method ofrecerTributo(planeta) {planeta.construirMurallas(2)}
 	
-	method entrenar(cantDias) {masaMuscular += 0.2 * cantDias}
+	method entrenar(cantDias) {masaMuscular += cantDias.div(5)}
 	method aprenderTecnica() {cantidadTecnicas += 1}
 }
 
@@ -42,9 +38,7 @@ class Docente inherits Persona {
 	override method esDestacada() = cantidadCursos > 3
 	
 	// No se si está bien.
-	override method ofrecerTributo() {
-		planetaQueHabita.fundarMuseo()
-	}
+	override method ofrecerTributo(planeta) {planeta.fundarMuseo()}
 	
 	override method valor() = super() + 5
 }
@@ -56,9 +50,7 @@ class Soldado inherits Persona {
 	override method potencia() = self.valor() + self.potenciaDeColeccionArmas()
 	
 	// No se si está bien.
-	override method ofrecerTributo() {
-		planetaQueHabita.construirMurallas(5)
-	}
+	override method ofrecerTributo(planeta) {planeta.construirMurallas(5)}
 }
 
 class Pistolete inherits Soldado {

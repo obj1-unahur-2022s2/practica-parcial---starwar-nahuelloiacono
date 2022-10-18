@@ -15,10 +15,7 @@ class Planeta {
 	method fundarMuseo() {cantidadMuseos += 1}
 	method potenciaAparente() = habitantes.max({h => h.potencia()}).potencia() * habitantes.size()
 	method necesitaReforzarse() = self.potenciaAparente() >= self.potenciaReal() * 2
-	// P generica no hace nada, P atleta 2km de muralla, P docente funda museo.
-	method recibirTributos() = habitantes.forEach({h => h.ofrecerTributo()})
+	method recibirTributos() = habitantes.forEach({h => h.ofrecerTributo(self)})
 	method habitantesValiosos() = habitantes.filter({h => h.valor() >= 40})
-	method recibirTributosDeHabitantesValiosos() = self.habitantesValiosos().forEach({h => h.ofrecerTributo()})
-	// Cada habitante valioso del planeta ofrece su tributo a unPlaneta.
-	method apaciguarPlaneta(unPlaneta) {unPlaneta.recibirTributosDeHabitantesValiosos()}
+	method apaciguarPlaneta(unPlaneta) = self.habitantesValiosos().forEach({h => h.ofrecerTributo(unPlaneta)})
 }
