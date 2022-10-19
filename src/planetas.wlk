@@ -17,5 +17,5 @@ class Planeta {
 	method necesitaReforzarse() = self.potenciaAparente() >= self.potenciaReal() * 2
 	method recibirTributos() = habitantes.forEach({h => h.ofrecerTributo(self)})
 	method habitantesValiosos() = habitantes.filter({h => h.valor() >= 40})
-	method apaciguarPlaneta(unPlaneta) = self.habitantesValiosos().forEach({h => h.ofrecerTributo(unPlaneta)})
+	method apaciguar(unPlaneta) = self.habitantesValiosos().forEach({h => h.ofrecerTributo(unPlaneta)})
 }

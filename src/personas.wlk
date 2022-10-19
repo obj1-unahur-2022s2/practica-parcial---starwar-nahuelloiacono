@@ -46,27 +46,24 @@ class Docente inherits Persona {
 class Soldado inherits Persona {
 	const property coleccionArmas = []
 	
-	method potenciaDeColeccionArmas() = coleccionArmas.sum({a => a.potencia()})
-	override method potencia() = self.valor() + self.potenciaDeColeccionArmas()
-	
-	// No se si está bien.
+	override method potencia() = self.valor() + coleccionArmas.sum({a => a.potencia(self)})
 	override method ofrecerTributo(planeta) {planeta.construirMurallas(5)}
 }
 
-class Pistolete inherits Soldado {
+class Pistolete {
 	var property centimetros
 	
-	override method potencia() {
-		if (self.edad() > 30) return centimetros * 3
+	method potencia(soldado) {
+		if (soldado.edad() > 30) return centimetros * 3
 		else return centimetros * 2
 	}
 }
 
-class Espadon inherits Soldado {
+class Espadon {
 	var property peso
 	
-	override method potencia() {
-		if (self.edad() < 40) return peso / 2
+	method potencia(soldado) {
+		if (soldado.edad() < 40) return peso / 2
 		else return 6
 	}
 }
